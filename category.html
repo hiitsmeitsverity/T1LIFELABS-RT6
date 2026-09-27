@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Archive Of Our Own --- RT6 LIFELABS</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="loader-screen" id="loaderScreen" aria-live="polite">
+      <div class="loader-content">
+        <div class="loader-spinner"></div>
+        <p>Loading archive...</p>
+      </div>
+    </div>
+    <header>
+      <div class="top">
+        <a class="logo" href="index.html"
+          >Archive <span>Of Our Own</span></a
+        >
+        <nav>
+          <a href="index.html">Home</a><a href="focus.html">Focus Problem</a
+          ><a href="category.html">Content Category</a
+          ><a href="audience.html">Target Audience</a
+          ><a href="about.html">About</a>
+        </nav>
+      </div>
+      <form id="searchForm" class="search">
+        <input
+          id="search"
+          placeholder="Search the archive…"
+          aria-label="Search"
+        /><button>Search</button>
+      </form>
+    </header>
+    <div class="wrap">
+      <div class="layout">
+        <aside class="sidebar">
+          <h3>Collections</h3>
+          <a href="focus.html">Focus Problem & Relevance</a
+          ><a href="category.html">YouTube Content Categories</a
+          ><a href="audience.html">Target Audiences</a>
+          <h3 style="margin-top: 25px">Archive</h3>
+          <a href="index.html">Home</a
+          ><a href="all.html">Search all collections</a>
+        </aside>
+        <main>
+          <h1>YouTube Content Categories</h1>
+          <p class="sub">
+            ⊹₊˚‧︵‿₊⊱·✶·⊰₊‿︵‧˚₊⊹⊹₊˚‧︵‿₊⊱·✶·⊰₊‿︵‧˚₊⊹⊹₊˚‧︵‿₊⊱·✶·⊰₊‿︵‧˚₊⊹⊹₊˚‧︵‿₊⊱·✶·⊰₊‿︵‧˚₊⊹
+          </p>
+          <div id="results" class="list"></div>
+         <p> insert content here </p>
+        </main>
+      </div>
+    </div>
+    <footer>
+      LIFELABS RT6 · TERM ONE - IPBA
+    </footer>
+    <script>
+      const loader = document.getElementById("loaderScreen");
+      const showLoader = () => {
+        if (!loader) return;
+        loader.classList.remove("hidden");
+      };
+      const hideLoader = () => {
+        if (!loader) return;
+        loader.classList.add("hidden");
+      };
+
+      window.addEventListener("load", () => {
+        setTimeout(hideLoader, 250);
+      });
+
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href") || "";
+        if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+          return;
+        }
+        if (href.startsWith("http://") || href.startsWith("https://")) {
+          if (!href.startsWith(window.location.origin)) {
+            return;
+          }
+        }
+        link.addEventListener("click", showLoader);
+      });
+
+      document.querySelectorAll("form").forEach((form) => {
+        form.addEventListener("submit", showLoader);
+      });
+    </script>
+    <script>
+      const DATA = {
+        focus: [
+          ("Study procrastination",
+          "A student-focused video collection exploring why learners delay important tasks and what practical interventions can help.",
+          ["students", "productivity", "procrastination"]),
+          ("Information overload",
+          "Videos about navigating too much information online, including filtering, note-taking, and focused research.",
+          ["research", "digital-life", "study-skills"]),
+          ("Presentation anxiety",
+          "Content examining the challenge of speaking in front of classmates and strategies for preparation and delivery.",
+          ["public-speaking", "students", "confidence"]),
+        ],
+        category: [
+          ("Educational explainer",
+          "A structured format that breaks a complicated issue into accessible concepts, examples, and practical takeaways.",
+          ["education", "explainer", "how-to"]),
+          ("Video essay",
+          "A longer-form format suited to analysis, context, storytelling, and connecting multiple ideas around one problem.",
+          ["video-essay", "analysis", "storytelling"]),
+          ("Interview / discussion",
+          "A conversational format that can surface different experiences and perspectives while keeping the topic approachable.",
+          ["interview", "discussion", "perspectives"]),
+        ],
+        audience: [
+          ("Senior high school students",
+          "Learners preparing for academic work who want concise, relatable guidance and examples they can apply immediately.",
+          ["students", "16-18", "school"]),
+          ("College students",
+          "Young adults balancing coursework, projects, research, and digital distractions who value practical, realistic advice.",
+          ["students", "college", "18-24"]),
+          ("Student creators",
+          "Beginning creators who want to turn school or social issues into useful YouTube content without losing audience relevance.",
+          ["creators", "students", "youtube"]),
+        ],
+      };
+      const TYPES = {
+        focus: "Focus Problems",
+        category: "YouTube Content Categories",
+        audience: "Target Audiences",
+      };
+      function esc(s) {
+        return s.replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#039;",
+            })[c],
+        );
+      }
+      function render(type, q = "") {
+        const box = document.querySelector("#results");
+        const query = q.trim().toLowerCase();
+        let rows = DATA[type].filter(
+          (x) =>
+            !query ||
+            (x[0] + " " + x[1] + " " + x[2].join(" "))
+              .toLowerCase()
+              .includes(query),
+        );
+        if (!rows.length) {
+          box.innerHTML =
+            '<div class="empty">No matching entries found. Try another keyword.</div>';
+          return;
+        }
+        box.innerHTML = rows
+          .map(
+            (x) =>
+              `<article class="item"><h2><a href="?type=${type}&entry=${encodeURIComponent(x[0])}">${esc(x[0])}</a></h2><div class="meta">${TYPES[type]} · archived entry</div><p>${esc(x[1])}</p><div class="tags">${x[2].map((t) => `<a class="tag" href="?type=${type}&q=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div></article>`,
+          )
+          .join("");
+      }
+      function globalSearch(q) {
+        const out = [];
+        for (const type of Object.keys(DATA))
+          DATA[type].forEach((x) => {
+            if (
+              (x[0] + " " + x[1] + " " + x[2].join(" "))
+                .toLowerCase()
+                .includes(q.toLowerCase())
+            )
+              out.push([type, x]);
+          });
+        const box = document.querySelector("#results");
+        if (!out.length) {
+          box.innerHTML =
+            '<div class="empty">No archived entries matched your search.</div>';
+          return;
+        }
+        box.innerHTML = out
+          .map(
+            ([type, x]) =>
+              `<article class="item"><h2><a href="?type=${type}&entry=${encodeURIComponent(x[0])}">${esc(x[0])}</a></h2><div class="meta">${esc(TYPES[type])}</div><p>${esc(x[1])}</p><div class="tags">${x[2].map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></article>`,
+          )
+          .join("");
+      }
+      document.querySelector("#searchForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const q = document.querySelector("#search").value;
+        if (q) globalSearch(q);
+      });
+    </script>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const type = params.get("type") || "category";
+      const entry = params.get("entry");
+      const q = params.get("q") || "";
+      if (entry) {
+        const item = DATA[type].find((x) => x[0] === entry);
+        document.querySelector("#results").innerHTML = item
+          ? `<article class="item"><h2>${esc(item[0])}</h2><div class="meta">${esc(TYPES[type])} · archived entry</div><p>${esc(item[1])}</p><div class="tags">${item[2].map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></article>`
+          : '<div class="empty">Entry not found.</div>';
+      } else if (q) render(type, q);
+      else render(type);
+    </script>
+  </body>
+</html>

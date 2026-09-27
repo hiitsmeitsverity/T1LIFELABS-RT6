@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Logo favicon">
+  <g transform="translate(12 8)">
+    <path d="M72 238c-34-83 44-174 152-151 58 12 80 54 79 84-2 48-53 60-100 52-42-7-51-37-74-48-44-20-89 35-67 95 24 64 170 81 228 23 20-20 30-47 25-76-8-49-48-86-101-98-89-20-172 31-187 113-15 81 80 138 155 146 92 10 181-35 228-127"
+      fill="none"
+      stroke="#f5b7c7"
+      stroke-width="28"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+
+    <path d="M185 258c11-69 71-117 159-104 57 8 96 48 97 93 2 60-50 105-119 117-68 12-144-18-162-82"
+      fill="none"
+      stroke="#f5b7c7"
+      stroke-width="28"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+
+    <path d="M340 78c42 34 55 80 46 134-12 72-89 128-154 129-71 2-123-45-136-114-13-71 34-136 111-165"
+      fill="none"
+      stroke="#f5b7c7"
+      stroke-width="28"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+
+    <path d="M72 238c26 44 59 71 109 74 76 6 127-34 171-95"
+      fill="none"
+      stroke="#f5b7c7"
+      stroke-width="28"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+  </g>
+
+  <g fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.96">
+    <path d="M72 238c-34-83 44-174 152-151 58 12 80 54 79 84-2 48-53 60-100 52-42-7-51-37-74-48-44-20-89 35-67 95 24 64 170 81 228 23 20-20 30-47 25-76-8-49-48-86-101-98-89-20-172 31-187 113-15 81 80 138 155 146 92 10 181-35 228-127"/>
+    <path d="M185 258c11-69 71-117 159-104 57 8 96 48 97 93 2 60-50 105-119 117-68 12-144-18-162-82"/>
+    <path d="M340 78c42 34 55 80 46 134-12 72-89 128-154 129-71 2-123-45-136-114-13-71 34-136 111-165"/>
+    <path d="M72 238c26 44 59 71 109 74 76 6 127-34 171-95"/>
+  </g>
+</svg>
