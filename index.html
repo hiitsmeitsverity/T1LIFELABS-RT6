@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="entry-screen" id="entryScreen" aria-live="polite">
+      <div class="letter-card" id="letterCard" role="button" tabindex="0" aria-label="Open the archive">
+        <div class="letter-frills" aria-hidden="true"></div>
+        <div class="letter-topline">
+          <span class="stamp" aria-hidden="true">♥</span>
+        </div>
+        <div class="letter-body">
+          <p class="letter-to">To the curious reader,</p>
+          <h2>Welcome to our archive</h2>
+          <p>
+            A little letter for a little visit. Press the heart and step into the story.
+          </p>
+        </div>
+        <div class="letter-footer">Open the letter</div>
+      </div>
+    </div>
+
     <div class="loader-screen" id="loaderScreen" aria-live="polite">
       <div class="loader-content">
         <div class="loader-spinner"></div>
@@ -64,6 +81,9 @@
     </footer>
     <script>
       const loader = document.getElementById("loaderScreen");
+      const entryScreen = document.getElementById("entryScreen");
+      const letterCard = document.getElementById("letterCard");
+
       const showLoader = () => {
         if (!loader) return;
         loader.classList.remove("hidden");
@@ -72,6 +92,30 @@
         if (!loader) return;
         loader.classList.add("hidden");
       };
+
+      const openArchive = () => {
+        if (!entryScreen || !letterCard) return;
+        localStorage.setItem("archive-entry", "seen");
+        entryScreen.classList.add("hidden");
+        window.location.hash = "home";
+      };
+
+      if (entryScreen && letterCard) {
+        const hasSeenEntry = localStorage.getItem("archive-entry") === "seen";
+        if (hasSeenEntry) {
+          entryScreen.classList.add("hidden");
+        } else {
+          entryScreen.classList.remove("hidden");
+        }
+
+        letterCard.addEventListener("click", openArchive);
+        letterCard.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openArchive();
+          }
+        });
+      }
 
       window.addEventListener("load", () => {
         setTimeout(hideLoader, 250);
