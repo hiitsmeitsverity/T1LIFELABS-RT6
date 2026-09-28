@@ -95,19 +95,11 @@
 
       const openArchive = () => {
         if (!entryScreen || !letterCard) return;
-        localStorage.setItem("archive-entry", "seen");
         entryScreen.classList.add("hidden");
         window.location.hash = "home";
       };
 
       if (entryScreen && letterCard) {
-        const hasSeenEntry = localStorage.getItem("archive-entry") === "seen";
-        if (hasSeenEntry) {
-          entryScreen.classList.add("hidden");
-        } else {
-          entryScreen.classList.remove("hidden");
-        }
-
         letterCard.addEventListener("click", openArchive);
         letterCard.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
