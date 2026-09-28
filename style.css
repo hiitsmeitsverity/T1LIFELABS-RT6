@@ -38,6 +38,7 @@ body {
 .entry-screen.hidden {
   opacity: 0;
   visibility: hidden;
+  display: none;
   pointer-events: none;
 }
 .letter-card {
@@ -146,6 +147,7 @@ body {
 .loader-screen.hidden {
   opacity: 0;
   visibility: hidden;
+  display: none;
 }
 .loader-content {
   display: flex;

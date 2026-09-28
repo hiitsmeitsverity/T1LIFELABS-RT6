@@ -95,7 +95,7 @@
 
       const openArchive = () => {
         if (!entryScreen || !letterCard) return;
-        entryScreen.classList.add("hidden");
+        entryScreen.remove();
         window.location.hash = "home";
       };
 
